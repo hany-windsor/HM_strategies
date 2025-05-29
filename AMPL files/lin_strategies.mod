@@ -120,7 +120,6 @@ minimize cost: sum{n in N} C_n_P[n]* alpha[n]* sum{m in M} D[m] + sum{n in N, m 
 
 
 
-
 # Constraints
 
 subject to one_strategy: sum{s in S} epsilon[s] = 1;
@@ -128,7 +127,6 @@ subject to one_strategy: sum{s in S} epsilon[s] = 1;
 subject to either_paltform_or_variant_stage {n in N, m in M}: alpha[n]+ beta[n,m] = sum{s in S} FV[n,m]*FH[n,s] * epsilon[s];
 
 subject to removing_features_in_variant_stage {n in N, m in M, s in S}:  alpha[n] - gamma[n,m] <= FV[n,m];
-
 
 subject to feature_assignment_to_one_sequence_order_platform {n in N}: sum{p in P, k in K}  x[n,k,p]  = alpha[n];
 
@@ -152,7 +150,6 @@ subject to sequences_assigned_to_formed_groups_platform { g in G} : sum{ k in K}
 
 subject to sequences_assigned_to_formed_groups_variants {m in M, j in J[m]}: sum {q in Q[m]} theta[m,q,j]<= 100* zeta[m,j];
 
-
 subject to early_sequence_first_platform {k in KK}: sum{n in N, p in P} x[n,k,p] >= sum{n in N, p in P} x[n,k+1,p];
 
 subject to early_sequence_first_variants { m in M, q in QQ[m] }: sum{n in N, p in P} y[n,m,q,p] >= sum{n in N, p in P} y[n,m,q+1,p];
@@ -160,8 +157,6 @@ subject to early_sequence_first_variants { m in M, q in QQ[m] }: sum{n in N, p i
 subject to early_group_first_platform {k in KK}: sum{g in G} g * rho[k,g] <= sum{g in G} g * rho[k+1,g];
 
 subject to early_group_first_variants {m in M, q in QQ[m]}: sum{j in J[m]} j * theta[m,q,j] <= sum{j in J[m]} j * theta[m,q+1,j];
-
-
 
 subject to accessiblity_to_features_platform_linearized{n in N, p in P, k in K,g in G}: LV1[k,g,n,p] <= FA[n,p] * eta[p,g];
 
@@ -181,10 +176,9 @@ subject to inclusion_relations_in_platform_linearized {g in G, n in N, nn in N: 
 
 subject to inclusion_relations_in_variant_stage_linearized {m in M, j in J[m], n in N, nn in N: n<nn and IR[n,nn] = 1}: sum {q in Q[m], p in P} LV2[n,m,j,q,p] - sum {q in Q[m], p in P} LV2[nn,m,j,q,p] = 0;
 
-#subject to seclusion_relations_in_platform {k in KKK, n in N, nn in N: n<>nn and SR[n,nn] = 1}: sum {p in P} (x[n,k,p] + x[nn,k+1,p] + x[nn,k+2,p])<= 1;
+subject to seclusion_relations_in_platform {k in KKK, n in N, nn in N: n<>nn and SR[n,nn] = 1}: sum {p in P} (x[n,k,p] + x[nn,k+1,p] + x[nn,k+2,p])<= 1;
 
-#subject to seclusion_relations_in_variant_stage {m in M, q in QQQ[m],n in N, nn in N: n<>nn and SR[n,nn] = 1}: sum {p in P} (y[n,m,q,p] + y[nn,m,q+1,p] + y[nn,m,q+2,p]) <= 1  ;
-
+subject to seclusion_relations_in_variant_stage {m in M, q in QQQ[m],n in N, nn in N: n<>nn and SR[n,nn] = 1}: sum {p in P} (y[n,m,q,p] + y[nn,m,q+1,p] + y[nn,m,q+2,p]) <= 1  ;
 
 subject to support_material_in_platform_linearized {g in G, p in P, n in N, nn in N: n<nn }: sum {k in K: SM[n,p]=1} LV1[k,g,n,p] - sum {k in K: SM[nn,p]=1} LV1[k,g,nn,p] = 0;
 
@@ -198,9 +192,9 @@ subject to number_of_material_change_times_in_platform_linearized {i in I}: sum 
  
 subject to number_of_material_change_times_in_variant_stage_linearized {m in M, i in I}: sum {n in N:B[n] = 1 and BM[n,i]=1}  beta[n,m] - sum{n in N, nn in N, p in P, q in QQ[m]: B[n] = 1 and n <> nn and BM[n,i] = 1 and BM[nn,i] = 1} LV4[n,m,q,p,nn,q+1] = N_M_V[i,m];
 
-#subject to needs_cooling_in_platform {n in N :B[n] = 1 }: sum {p in P, k in K}  CS[n] * x[n,k,p]  <= omega[n];
+subject to needs_cooling_in_platform {n in N :B[n] = 1 }: sum {p in P, k in K}  CS[n] * x[n,k,p]  <= omega[n];
  
-#subject to needs_cooling_in_variant_stage {n in N, m in M :B[n] = 1 }: sum {p in P, q in Q[m]}  CS[n] * y[n,m,q,p]  <= mu[n,m];
+subject to needs_cooling_in_variant_stage {n in N, m in M :B[n] = 1 }: sum {p in P, q in Q[m]}  CS[n] * y[n,m,q,p]  <= mu[n,m];
 
 subject to needs_postprocessing_in_platform {n in N :B[n] = 1 }: sum {p in P, k in K}  PO[n,p] * x[n,k,p]  <= lambda[n];
  
@@ -210,13 +204,11 @@ subject to needs_inspection_in_platform {n in N :B[n] = 1 }: sum {p in P, k in K
  
 subject to needs_inspection_in_variant_stage {n in N, m in M :B[n] = 1 }: sum {p in P, q in Q[m]}  IO[n,p] * y[n,m,q,p]  <= tau[n,m];
 
-
 subject to linearizing_rho_times_x_1 {k in K, g in G, n in N, p in P}: LV1[k,g,n,p] >= x[n,k,p] + rho[k,g] - 1;
 
 subject to linearizing_rho_times_x_2 {k in K, g in G, n in N, p in P}: LV1[k,g,n,p] <= x[n,k,p] ;
 
 subject to linearizing_rho_times_x_3 {k in K, g in G, n in N, p in P}: LV1[k,g,n,p] <= rho[k,g] ;
-
 
 subject to linearizing_theta_times_y_1{n in N, m in M, j in J[m], q in Q[m], p in P}: LV2[n,m,j,q,p] >= y[n,m,q,p] + theta[m,q,j] - 1;
 
@@ -224,13 +216,11 @@ subject to linearizing_theta_times_y_2{n in N, m in M, j in J[m], q in Q[m], p i
 
 subject to linearizing_theta_times_y_3{n in N, m in M, j in J[m], q in Q[m], p in P}: LV2[n,m,j,q,p] <= theta[m,q,j];
 
-
 subject to linearizing_x_times_x_1{n in N, p in P, k in KK, nn in N: n<>nn }: LV3[n,p,k,nn,p,k+1] >= x[n,k,p] + x[nn,k+1,p] - 1;
 
 subject to linearizing_x_times_x_2{n in N, p in P, k in KK, nn in N: n<>nn }: LV3[n,p,k,nn,p,k+1] <= x[n,k,p];
 
 subject to linearizing_x_times_x_3{n in N, p in P, k in KK, nn in N: n<>nn }: LV3[n,p,k,nn,p,k+1] <= x[nn,k+1,p];
- 
 
 subject to linearizing_y_times_y_1{n in N, m in M, q in QQ[m], nn in N, p in P}: LV4[n,m,q,p,nn,q+1] >= y[n,m,q,p] + y[nn,m,q+1,p] - 1;
 
@@ -239,10 +229,3 @@ subject to linearizing_y_times_y_2{n in N, m in M, q in QQ[m], nn in N, p in P}:
 subject to linearizing_y_times_y_3{n in N, m in M, q in QQ[m], nn in N, p in P}: LV4[n,m,q,p,nn,q+1] <= y[nn,m,q+1,p];
  
 
-
-#subject to features_manufactured_in_platform {n in N}: alpha[n] <= sum{s in S} FH[n,s] * epsilon[s];
-#subject to features_manufactured_in_variant_stage {n in N, m in M}: beta[n,m] <= sum{s in S} FV[n,m]*FH[n,s] * epsilon[s];
-#subject to either_paltform_or_variant_stage_linearized {n in N, m in M, s in S}: FH[n,s] * LV5[n,s]+ FH[n,s]* LV6[n,m,s] <= 1;
-#subject to feature_assignment_to_one_sequence_order_platform_linearized {n in N, s in S}: sum{p in P, k in K} FH[n,s] * LV8[n,k,p,s] <= 1;
-#subject to feature_assignment_to_one_sequence_order_variant_linearized {n in N, m in M, s in S}: sum{p in P, q in Q[m]} FH[n,s] * FV[n,m]* LV9[n,m,q,p,s] = 1;
- 
