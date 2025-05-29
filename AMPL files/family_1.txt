@@ -1,0 +1,213 @@
+# data of the hybrid manufacturing systems including platform and Strategies #
+
+data;
+
+set N:= 1 2 3 4 5 6 7 8 9 10 11 12 13 ;
+set M:= 1 2 3 ;
+ 
+set S := 1 2 3 4 ;
+
+set I := 1 2;
+
+set J[1] := 1 2 3 4 ;
+set J[2] := 1 2 3 4 ;
+set J[3] := 1 2 3 4 ;
+
+set G := 1 2 3  ;
+set GG := 1 2  ;
+
+set K := 1 2 3 4 5 6 7 8 9 10  ;
+set KK := 1 2 3 4 5 6 7 8 9  ; 
+set KKK := 1 2 3 4 5 6 7 8 9 ;
+
+set Q[1] := 1 2 3 4 5 6 7 8 9;
+set Q[2] := 1 2 3 4 5 6 7;
+set Q[3] := 1 2 3 4 5 6 7;
+
+set QQ[1] := 1 2 3 4 5 6 7 8;
+set QQ[2] := 1 2 3 4 5;
+set QQ[3] := 1 2 3 4 5 6;
+
+set QQQ[1] := 1 2 3 4 5 6 7;
+set QQQ[2] := 1 2 3 4;
+set QQQ[3] := 1 2 3 4 5;
+
+set P := 1 2;
+
+set T:= 1 2;
+ 
+
+# feature type data
+
+param D:= 
+1	100
+2	250
+3	175; 
+
+param B :=
+1	0
+2	0
+3	0
+4	1
+5	1
+6	1
+7	1
+8	1
+9	1
+10	1
+11	1
+12	1
+13	1
+;
+
+
+# features belonging to variants
+
+param FV:	1	2	3 :=
+1	1	1	1
+2	1	1	1
+3	1	1	1
+4	1	1	1
+5	1	1	1
+6	1	1	1
+7	1	1	1
+8	1	1	1
+9	1	1	1
+10	1	1	0
+11	1	0	1
+12	1	0	1
+13	1	1	0
+;
+
+param FH:	1	2	3	4 :=
+1	1	1	1	1
+2	1	1	1	1
+3	1	1	1	1
+4	1	1	0	0
+5	0	0	1	1
+6	0	0	1	1
+7	1	0	1	0
+8	0	1	0	1
+9	0	1	0	1
+10	1	1	1	1
+11	1	1	1	1
+12	1	1	1	1
+13	1	1	1	1
+;
+
+
+# subtractive time (seconds) for machining features only
+
+let ST[1,1] := 20; 
+let ST[2,1] := 18;  
+let ST[3,1] := 18; 
+let ST[1,2] := 8; 
+let ST[2,2] := 6;  
+let ST[3,2] := 6; 
+ 
+
+# additive time (seconds) for additive features only
+let A[4,1] := 24;  
+let A[5,1] := 12;
+let A[6,1] := 12;
+
+let A[7,1] := 24; 
+let A[8,1] := 12;  
+let A[9,1] := 12;
+ 
+let A[10,1] := 8; 
+let A[11,1] := 8; 
+let A[12,1] := 8; 
+let A[13,1] := 8; 
+
+let A[4,2] := 44;  
+let A[5,2] := 22;
+let A[6,2] := 22;
+
+let A[7,2] := 44; 
+let A[8,2] := 22;  
+let A[9,2] := 22;
+ 
+let A[10,2] := 18; 
+let A[11,2] := 18; 
+let A[12,2] := 18; 
+let A[13,2] := 18; 
+;   
+
+
+# clamping time (seconds)
+# for {p in P} let CT[p]:= 10;
+
+# tool change time (seconds)
+let L := 5;
+
+# material change time (seconds)
+let H := 6;
+
+
+# feature accessibility data
+
+
+# post processing time
+let PP[6] := 10; 
+let PP[9] := 10; 
+
+# postprocessing operations
+let PO[6,1] := 1; 
+let PO[9,1] := 1; 
+
+
+# inspection time
+
+
+# cooling time
+let U[4] := 20;
+let U[7] := 20;
+
+
+# precedence relationship data
+let PR[5,6]:= 1; 
+let PR[8,9] := 1;
+
+
+# cooling Sate data
+let CS[4]:=1;
+let CS[7]:=1;
+
+# cutting tool data
+let MT[1, 1] := 1;
+let MT[2, 2] := 1;
+let MT[3, 2] := 1;
+
+
+# build material data;
+let BM[4, 1] := 1;
+let BM[5, 1] := 1;
+let BM[6, 1] := 1;
+let BM[7, 1] := 1;
+let BM[8, 1] := 1;
+let BM[9, 1] := 1;
+let BM[10, 2] := 1;
+let BM[11, 2] := 1;
+let BM[12, 2] := 1;
+let BM[13, 2] := 1;
+;
+
+
+# support material
+
+
+
+for{n in N} let C_n_P[n]:= precision(Uniform(1,3),0);
+for{n in N} let C_n_A[n]:= precision(Uniform(8,12),0);
+for{n in N} let C_n_R[n]:= precision(Uniform(4,7),0);
+
+let C_Subtractive := 0.5; let C_Additive := 0.4; let C_Removal := 0.5;
+let C_Cooling := 0.8; let C_Postprocessing := 0.5; let C_Inspection := 0.9;
+let C_Tool_change := 0.3; let C_Material_change := 0.3; let C_Setup := 0.3;
+
+
+
+
+
+

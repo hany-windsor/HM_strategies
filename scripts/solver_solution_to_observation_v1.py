@@ -79,15 +79,6 @@ def converting_solver_solution_to_observation(df_solution_of_x, df_solution_of_y
     sequence_df = pd.DataFrame([sequence_dic])
     setups_df = pd.DataFrame([setup_dict])
 
-    #Get unique feature values
-
-
-    # Create a dictionary to store the setup values for each feature
-
-
-    # Create a DataFrame with one row using the setup_dict
-
-
     variant_res_df = pd.concat([sequence_df, setups_df], axis=1)
 
     path_to_variant_results_csv = Path(path_to_values,"variant_res_df.csv")
@@ -163,9 +154,9 @@ if __name__ == "__main__":
                 # Drop the column if all values are the same
                 generated_data.drop(column, axis=1, inplace=True)
 
-    generated_data.to_csv("outputs/dataset_family_2_reduced.csv")
+    generated_data.to_csv("outputs/dataset_family_2.csv")
     generated_data.pop("total_cost")
 
-    generated_data.to_csv("outputs/two_class_family_2_reduced.csv")
+    generated_data.to_csv("outputs/two_class_family_2.csv")
 
 

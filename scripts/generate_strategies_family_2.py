@@ -27,26 +27,26 @@ strategies = {
     "FF 22": [["PF 22"]],
     "FF 23": [["PF 23"]],
     "FF 24": [["PF 24"]],
-    "FF 25": [["PF 25"], ["PF 26", "PF 27"], ["PF 28", "PF 29", "PF 30"], ["PF 31", "PF 32", "PF 33", "PF 34"]],
-    "FF 26": [["PF 35"], ["PF 36", "PF 37"], ["PF 38", "PF 39", "PF 40"], ["PF 41", "PF 42", "PF 43", "PF 44"]],
-    "FF 27": [["PF 45"], ["PF 46", "PF 47"]],
-    "FF 28": [["PF 48"], ["PF 49", "PF 50"]],
-    "FF 29": [["PF 51"], ["PF 52", "PF 53"]],
-    "FF 30": [["PF 54"], ["PF 55", "PF 56"]],
-    "FF 31": [["PF 57"]],
-    "FF 32": [["PF 58"]],
-    "FF 33": [["PF 59"], ["PF 60", "PF 61"], ["PF 62", "PF 63", "PF 64"], ["PF 65", "PF 66", "PF 67", "PF 68"]],
-    "FF 34": [["PF 69"], ["PF 70", "PF 71"], ["PF 72", "PF 73", "PF 74"], ["PF 75", "PF 76", "PF 77", "PF 78"]],
+    "FF 25": [["PF 25"], ["PF 26", "PF 27"]],
+    "FF 26": [["PF 28"], ["PF 29", "PF 30"]],
+    "FF 27": [["PF 31"], ["PF 32", "PF 33"]],
+    "FF 28": [["PF 34"], ["PF 35", "PF 36"]],
+    "FF 29": [["PF 37"], ["PF 38", "PF 39"]],
+    "FF 30": [["PF 40"], ["PF 41", "PF 42"]],
+    "FF 31": [["PF 43"]],
+    "FF 32": [["PF 44"]],
+    "FF 33": [["PF 45"], ["PF 46", "PF 47"]],
+    "FF 34": [["PF 48"], ["PF 49", "PF 50"]],
 }
 
 # Generate all combinations of strategies
 all_combinations = list(product(*strategies.values()))
 
 # List of all PFs
-all_PF = [f"PF {i}" for i in range(1, 79)]
+all_PF = [f"PF {i}" for i in range(1, 51)]
 
 # Create an empty dataframe
-df = pd.DataFrame(0, index=all_PF, columns=range(1, 4097))
+df = pd.DataFrame(0, index=all_PF, columns=range(1, 257))
 
 # Populate the dataframe
 for col_num, combination in enumerate(all_combinations, start=1):

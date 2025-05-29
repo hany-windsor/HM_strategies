@@ -31,5 +31,5 @@ for col_num, combination in enumerate(all_combinations, start=1):
 
 
 
-df.to_csv("strategies_family_1_reduced.csv")
+df.to_csv("strategies_family_1.csv")
 

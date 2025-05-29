@@ -27,7 +27,7 @@ def main(argc, argv):
         ampl.set_option("solver", argv[1])
 
     ampl.read("C:/bin/lin_strategies.mod")
-    ampl.read_data("C:/bin/family_1_reduced.txt")
+    ampl.read_data("C:/bin/family_3.txt")
 
     for i in range(11):
         random_num = int(round((random.uniform(0, 1000)), 0))
@@ -49,7 +49,7 @@ def main(argc, argv):
         ampl.solve()
 
         for sol in range(1, ampl.get_value("cost.npool") + 1):
-            folder_name = f'family_1_reduced/outputs{i}_{sol}'
+            folder_name = f'family_3/outputs{i}_{sol}'
 
             os.makedirs(folder_name, exist_ok=True)
             ampl.eval(f"solution savesol{sol}.sol;")  # load the solution

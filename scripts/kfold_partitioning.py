@@ -2,7 +2,7 @@ import pandas as pd
 from itertools import combinations
 
 # Load your CSV data
-csv_file_path = "outputs/two_class_family_1_reduced.csv"
+csv_file_path = "outputs/two_class_family_1.csv"
 data = pd.read_csv(csv_file_path)
 data = data.iloc[:, 1:]
 
