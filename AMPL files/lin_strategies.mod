@@ -119,7 +119,6 @@ minimize cost: sum{n in N} C_n_P[n]* alpha[n]* sum{m in M} D[m] + sum{n in N, m 
 + C_Setup * O *(sum{g in G} pi[g]+ sum{m in M, j in J[m]} zeta[m,j]);
 
 
-
 # Constraints
 
 subject to one_strategy: sum{s in S} epsilon[s] = 1;
