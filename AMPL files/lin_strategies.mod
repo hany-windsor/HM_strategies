@@ -124,7 +124,7 @@ minimize cost: sum{n in N} C_n_P[n]* alpha[n]* sum{m in M} D[m] + sum{n in N, m 
 
 subject to one_strategy: sum{s in S} epsilon[s] = 1;
 
-subject to either_paltform_or_variant_stage {n in N, m in M}: alpha[n]+ beta[n,m] = sum{s in S} FV[n,m]*FH[n,s] * epsilon[s];
+subject to either_platform_or_variant_stage {n in N, m in M}: alpha[n]+ beta[n,m] = sum{s in S} FV[n,m]*FH[n,s] * epsilon[s];
 
 subject to removing_features_in_variant_stage {n in N, m in M, s in S}:  alpha[n] - gamma[n,m] <= FV[n,m];
 
