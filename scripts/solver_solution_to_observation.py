@@ -118,7 +118,7 @@ if __name__ == "__main__":
     file_name_y = f'values_var_y.csv'
     file_name_obj_fun = f'values_var_z.json'
 
-    folder_path =  r"C:\Users\enhan\PycharmProjects\strategiesHM\family_1"
+    folder_path =  r"C:\Users\enhan\PycharmProjects\strategiesHM\family_2"
 
     # Get a list of subfolder names
     subfolder_names = [subfolder for subfolder in os.listdir(folder_path) if
@@ -164,9 +164,9 @@ if __name__ == "__main__":
         class_column = generated_data.pop("class")  # Remove the "total_cost" column from the DataFrame
         generated_data.insert(0, "class", class_column)  # Insert it as the first column
 
-    generated_data.to_csv("outputs/dataset_family_3.csv")
+    generated_data.to_csv("outputs/dataset_family_2.csv")
     generated_data.pop("total_cost")
 
-    generated_data.to_csv("outputs/two_class_family_3.csv")
+    generated_data.to_csv("outputs/two_class_family_2.csv")
 
 
