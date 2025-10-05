@@ -39,7 +39,6 @@ def main(argc, argv):
 
         # Create the folder if it doesn't exist
         #os.makedirs(folder_name, exist_ok=True)
-
         # Define the file path for the CSV file within the folder
         file_name_x = f'values_var_x.csv'
         file_name_y = f'values_var_y.csv'
